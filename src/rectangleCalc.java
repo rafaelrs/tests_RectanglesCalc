@@ -39,10 +39,9 @@ public class rectangleCalc {
         //rectangles.add(new Rectangle(2, 2, 6, 4));
         //rectangles.add(new Rectangle(1, 0, 3, 5));
 
-        boolean isEndOfInput = false;
         System.out.println("Enter rectangles data. Use format: left top right bottom");
         System.out.println("Example: 0 1 3 3");
-        while (!isEndOfInput) {
+        while (true) {
             try {
                 System.out.println("Rectangle " + String.valueOf(rectangles.size() + 1) + " ([ENTER] to finish)");
                 BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
@@ -67,7 +66,6 @@ public class rectangleCalc {
             }
 
         }
-
 
         validateRectangles(rectangles);
 
