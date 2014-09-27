@@ -1,4 +1,6 @@
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 /**
@@ -18,7 +20,7 @@ public class rectangleCalc {
 
         @Override
         public String toString() {
-            return "-(" + String.valueOf(left) + ", " + String.valueOf(top) + "; " + String.valueOf(right) + ", " + String.valueOf(bottom) + ")";
+            return "(" + String.valueOf(left) + ", " + String.valueOf(top) + "; " + String.valueOf(right) + ", " + String.valueOf(bottom) + ")";
         }
 
         @Override
@@ -33,9 +35,39 @@ public class rectangleCalc {
     public static void main(String[] args) {
         //Create array with rectangles
         ArrayList<Rectangle> rectangles = new ArrayList<Rectangle>();
-        rectangles.add(new Rectangle(0, 1, 3, 3));
-        rectangles.add(new Rectangle(2, 2, 6, 4));
-        rectangles.add(new Rectangle(1, 0, 3, 5));
+        //rectangles.add(new Rectangle(0, 1, 3, 3));
+        //rectangles.add(new Rectangle(2, 2, 6, 4));
+        //rectangles.add(new Rectangle(1, 0, 3, 5));
+
+        boolean isEndOfInput = false;
+        System.out.println("Enter rectangles data. Use format: left top right bottom");
+        System.out.println("Example: 0 1 3 3");
+        while (!isEndOfInput) {
+            try {
+                System.out.println("Rectangle " + String.valueOf(rectangles.size() + 1) + " ([ENTER] to finish)");
+                BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
+                String inData = in.readLine();
+
+                if (inData.isEmpty()) break;
+
+                String[] numStrings = inData.split(" ");
+                if (numStrings.length != 4) {
+                    System.out.println("Input ERROR. There should be 4 numbers");
+                    break;
+                }
+
+                rectangles.add(new Rectangle(Integer.parseInt(numStrings[0]), Integer.parseInt(numStrings[1]), Integer.parseInt(numStrings[2]), Integer.parseInt(numStrings[3])));
+
+            } catch (IOException e) {
+                System.out.println("Input ERROR!");
+                return;
+            } catch (NumberFormatException e) {
+                System.out.println("Input ERROR! Wrong number format");
+                return;
+            }
+
+        }
+
 
         validateRectangles(rectangles);
 
